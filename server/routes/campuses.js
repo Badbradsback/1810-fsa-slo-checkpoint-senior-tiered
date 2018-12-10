@@ -38,7 +38,7 @@ router.get('/:id/students', async(req, res, next) => {
     })
     res.json(students);
   } catch(error) {
-    next(error)
+    next(error);
   }
 })
 
