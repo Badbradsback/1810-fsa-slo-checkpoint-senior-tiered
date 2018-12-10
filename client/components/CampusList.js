@@ -1,5 +1,16 @@
 import React from 'react';
 
 export const CampusList = (props) => {
-  // your code here
+  const campuses = props.campuses;
+  return (
+    <ul>
+      {
+        campuses.map(campus => {
+          return (
+            <li>{campus.name}</li>
+          )
+        })
+      }
+    </ul>
+  )
 };

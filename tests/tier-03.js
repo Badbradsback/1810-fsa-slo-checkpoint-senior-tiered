@@ -64,7 +64,7 @@ describe('Tier Three', () => {
       describe('Class method `findByPhase`', () => {
         // defined in ../server/models/Student.js
 
-        xit('finds all students belonging to a certain phase', async () => {
+        it('finds all students belonging to a certain phase', async () => {
           const students = await Student.findByPhase('junior')
           expect(students.length).to.be.equal(1);
           expect(students[0].name).to.be.equal('Terry Witz');
@@ -77,7 +77,7 @@ describe('Tier Three', () => {
       describe('GET `/api/campuses/:id` route enhanced', () => {
         // defined in ../server/routes/campuses.js
 
-        xit('populates (eager-load) the student information for the found campus', async () => {
+        it('populates (eager-load) the student information for the found campus', async () => {
           const response = await agent.get('/api/campuses/1').expect(200);
           expect(response.body.students.length).to.equal(2);
           expect(response.body.students[0].name).to.exist;
@@ -85,7 +85,7 @@ describe('Tier Three', () => {
       })
 
       describe('POST `/api/campuses/` route', () => {
-        xit('responds with a created campus', async () => {
+        it('responds with a created campus', async () => {
           // defined in ../server/routes/campuses.js
 
           const response = await agent.post('/api/campuses')
@@ -101,7 +101,7 @@ describe('Tier Three', () => {
       describe('POST `/api/campuses/:id/students` route', () => {
         // defined in ../server/routes/campuses.js
 
-        xit('responds with a created student, associated with the campus indicated by the route', async () => {
+        it('responds with a created student, associated with the campus indicated by the route', async () => {
           const response = await agent.post('/api/campuses/1/students')
             .send({
               name: 'Karley Remoteson',
@@ -127,16 +127,16 @@ describe('Tier Three', () => {
         campusInputInstance = renderedCampusInput.instance();
       })
 
-      xit('is a class component with an initial local state', () => {
+      it('is a class component with an initial local state', () => {
         expect(campusInputInstance).to.exist;
         expect(campusInputInstance.state).to.eql({name: ''});
       })
 
-      xit('renders an <input /> element', () => {
+      it('renders an <input /> element', () => {
         expect(renderedCampusInput.find('input').getElement()).to.exist;
       })
 
-      xit('has a method called `handleChange` that is invoked when there is a change event triggered by the <input /> element', () => {
+      it('has a method called `handleChange` that is invoked when there is a change event triggered by the <input /> element', () => {
         expect(typeof campusInputInstance.handleChange).to.equal('function')
         const handleChangeSpy = sinon.spy()
         campusInputInstance.handleChange = handleChangeSpy;
@@ -147,7 +147,7 @@ describe('Tier Three', () => {
         expect(handleChangeSpy.calledOnce).to.equal(true);
       })
 
-      xit('`handleChange` updates the local state', () => {
+      it('`handleChange` updates the local state', () => {
         renderedCampusInput.find('input').simulate('change', {
           target: { value: 'Another Campus Name' }
         })
@@ -178,7 +178,7 @@ describe('Tier Three', () => {
 
         describe('`addCampusAction`', () => {
 
-          xit('creates an ADD_CAMPUS action', () => {
+          it('creates an ADD_CAMPUS action', () => {
             const addCampusAction = addCampus(starfleetCampus);
             expect(addCampusAction.type).to.equal(ADD_CAMPUS);
             expect(addCampusAction.campus).to.eql(starfleetCampus);
@@ -188,7 +188,7 @@ describe('Tier Three', () => {
 
         describe('`postCampus`', () => {
 
-          xit('returns a thunk to post a new campus to the backend and dispatch an ADD_CAMPUS action', async () => {
+          it('returns a thunk to post a new campus to the backend and dispatch an ADD_CAMPUS action', async () => {
             mock.onPost('/api/campuses').replyOnce(201, starfleetCampus);
 
             await store.dispatch(postCampus(starfleetCampus))
@@ -205,7 +205,7 @@ describe('Tier Three', () => {
       describe('reducer', () => {
           // defined in ../client/redux/reducer.js
 
-        xit('returns a new state with the newly created campus added to the list of campuses', () => {
+        it('returns a new state with the newly created campus added to the list of campuses', () => {
           const remoteCampus = {id: 1, name: 'Fullstack Remote Campus'}
           const starfleetCampus = {id: 2, name: 'Starfleet Academy'}
           initialState.campuses = [remoteCampus];
@@ -237,7 +237,7 @@ describe('Tier Three', () => {
   */
 
   describe('`throttle` utility method', () => {
-    xit('takes a function and a number (throttle time - in milliseconds) and returns a throttled function', () => {
+    it('takes a function and a number (throttle time - in milliseconds) and returns a throttled function', () => {
       const funcToThrottle = (name) => {
         console.log(`What up ${name}`);
       }
@@ -248,7 +248,7 @@ describe('Tier Three', () => {
 
     describe('returned throttled function', () => {
 
-      xit('runs the original function and upon invocation passes it the same arguments', () => {
+      it('runs the original function and upon invocation passes it the same arguments', () => {
         const spiedFunction = chai.spy();
         const throttleTime = 50;
         const throttledFunction = utils.throttle(spiedFunction, throttleTime);
@@ -260,7 +260,7 @@ describe('Tier Three', () => {
         expect(spiedFunction).to.have.been.called.with.exactly(1, 'omri', 'polar bear');
       })
 
-      xit('ensures that multiple function calls within the throttling period will not invoke the original function', (done) => {
+      it('ensures that multiple function calls within the throttling period will not invoke the original function', (done) => {
         const spiedFunction = chai.spy();
         const throttleTime = 50;
         const throttledFunction = utils.throttle(spiedFunction, throttleTime);
@@ -284,7 +284,7 @@ describe('Tier Three', () => {
         }, 40);
       });
 
-      xit('can invoke the original function after the throttling period is over', (done) => {
+      it('can invoke the original function after the throttling period is over', (done) => {
         const spiedFunction = chai.spy();
         const throttleTime = 50;
         const throttledFunction = utils.throttle(spiedFunction, throttleTime);
