@@ -7,7 +7,7 @@ export const CampusList = (props) => {
       {
         campuses.map(campus => {
           return (
-            <li>{campus.name}</li>
+            <li key={campus.id}>{campus.name}</li>
           )
         })
       }

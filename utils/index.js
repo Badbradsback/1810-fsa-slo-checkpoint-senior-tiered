@@ -16,10 +16,8 @@ utils.generateGroups = (students, size) => {
   //your code here
   let result = []
   let temp = []
-  while(students.length > 0)
-  {
-    for(let i = 0; i < size; i++)
-    {
+  while(students.length) {
+    for(let i = 0; i < size; i++) {
       if(students.length) {
         temp.push(students.shift());
       }
